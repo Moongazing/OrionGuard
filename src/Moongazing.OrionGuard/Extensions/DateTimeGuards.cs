@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-namespace Moongazing.OrionGuard.Extensions
+﻿namespace Moongazing.OrionGuard.Extensions
 {
     /// <summary>
     /// Provides validation methods for DateTime values.
@@ -76,7 +73,7 @@ namespace Moongazing.OrionGuard.Extensions
                 throw new ArgumentException($"{parameterName} cannot be on a {day}.", parameterName);
             }
         }
-   
+
 
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Moongazing.OrionGuard.Extensions
+﻿namespace Moongazing.OrionGuard.Extensions
 {
     /// <summary>
     /// Provides validation methods for numeric values.
