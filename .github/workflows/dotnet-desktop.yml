@@ -30,6 +30,10 @@ jobs:
       - name: Build project
         run: dotnet build ./src/Moongazing.OrionGuard/Moongazing.OrionGuard.csproj --no-restore --configuration Release
 
+      - name: List files in docs directory
+        run: ls -R src/Moongazing.OrionGuard/docs
+
+
       # NuGet paketini `src` dizininden oluştur
       - name: Pack NuGet package
         run: dotnet pack ./src/Moongazing.OrionGuard/Moongazing.OrionGuard.csproj --no-build --configuration Release -o ./nupkgs
