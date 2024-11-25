@@ -21,8 +21,8 @@
     <PackageTags>guard validation exceptions .NET</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
-    <None Include="docs\LICENSE.txt" Pack="true" PackagePath="\"/>
+    <None Include="docs\README.md" Pack="true" PackagePath="docs/"/>
+    <None Include="docs\LICENSE.txt" Pack="true" PackagePath="docs/"/>
 
   </ItemGroup>
 </Project>
