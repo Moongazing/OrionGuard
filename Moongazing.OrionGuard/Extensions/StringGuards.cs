@@ -1,4 +1,5 @@
 ﻿using Moongazing.OrionGuard.Exceptions;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Moongazing.OrionGuard.Extensions;
