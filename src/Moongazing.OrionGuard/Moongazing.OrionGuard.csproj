@@ -11,18 +11,17 @@
     <Authors>Tunahan Ali Ozturk</Authors>
     <Company>Tunahan Ali Ozturk</Company>
     <Description>OrionGuard is a lightweight and extensible library for input validation in .NET applications.</Description>
-    <PackageLicenseFile>docs/LICENSE.txt</PackageLicenseFile>
-    <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+    <PackageLicenseFile>C:/Users/Tunahan Ali Ozturk/Desktop/Moongazing.OrionGuard/Moongazing.OrionGuard/src/Moongazing.OrionGuard/docs/LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>C:/Users/Tunahan Ali Ozturk/Desktop/Moongazing.OrionGuard/Moongazing.OrionGuard/src/Moongazing.OrionGuard/docs/README.md</PackageReadmeFile>
+
     <PackageTags>guard validation exceptions .NET</PackageTags>
     <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="docs/LICENSE.txt" Pack="true" PackagePath="">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="C:/Users/Tunahan Ali Ozturk/Desktop/Moongazing.OrionGuard/Moongazing.OrionGuard/src/Moongazing.OrionGuard/docs/LICENSE.txt" Pack="true" PackagePath="">
     </None>
-    <None Include="docs/README.md" Pack="true" PackagePath="">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="C:/Users/Tunahan Ali Ozturk/Desktop/Moongazing.OrionGuard/Moongazing.OrionGuard/src/Moongazing.OrionGuard/docs/README.md" Pack="true" PackagePath="">
     </None>
   </ItemGroup>
 </Project>
