@@ -15,14 +15,14 @@
     <Description>
       OrionGuard is a lightweight and extensible library for input validation in .NET applications.
     </Description>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-<PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>docs/LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>docs/README.md</PackageReadmeFile>
 
     <PackageTags>guard validation exceptions .NET</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
-    <None Include="LICENSE.txt" />
-    <None Include="README.md" />
+    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+    <None Include="docs\LICENSE.txt" Pack="true" PackagePath="\"/>
+
   </ItemGroup>
 </Project>
