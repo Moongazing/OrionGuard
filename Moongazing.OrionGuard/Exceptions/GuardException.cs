@@ -1,4 +1,6 @@
-﻿namespace Moongazing.OrionGuard.Exceptions;
+﻿using System;
+
+namespace Moongazing.OrionGuard.Exceptions;
 
 /// <summary>
 /// Base exception for all guard-related errors.

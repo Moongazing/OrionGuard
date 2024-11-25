@@ -1,6 +1,7 @@
 ﻿namespace Moongazing.OrionGuard.Core;
 
 using Moongazing.OrionGuard.Exceptions;
+using System;
 
 /// <summary>
 /// Provides core static methods for validating input parameters.
