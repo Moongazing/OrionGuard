@@ -186,6 +186,13 @@ public static class StringGuards
             throw new InvalidEmailException(parameterName);
         }
     }
+    /// <summary>
+    /// Validates that the provided string is a required length.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="requiredLength"></param>
+    /// <param name="parameterName"></param>
+    /// <exception cref="ArgumentException"></exception>
     public static void AgainstLengthMismatch(this string value, int requiredLength, string parameterName)
     {
         if (value.Length != requiredLength)
@@ -193,7 +200,12 @@ public static class StringGuards
             throw new ArgumentException($"{parameterName} must be exactly {requiredLength} characters long.", parameterName);
         }
     }
-
+    /// <summary>
+    /// Validates that the provided string is contain white spaces.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="parameterName"></param>
+    /// <exception cref="ArgumentException"></exception>
     public static void AgainstContainingWhitespace(this string value, string parameterName)
     {
         if (value.Contains(' '))

@@ -1,192 +1,254 @@
-﻿using System;
+﻿using Moongazing.OrionGuard.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
-namespace Moongazing.OrionGuard.Core
+namespace Moongazing.OrionGuard.Core;
+
+public static class Guard
 {
-    public static class Guard
+    public static void AgainstNull<T>(T? value, string parameterName) where T : class
     {
-        public static void Against<TException>(bool condition, string message) where TException : Exception, new()
+        if (value == null)
         {
-            if (condition)
-            {
-                throw (TException)Activator.CreateInstance(typeof(TException), message)!;
-            }
+            throw new NullValueException(parameterName);
         }
+    }
 
-        public static void AgainstNull<T>(T value, string parameterName) where T : class
+    public static void AgainstNullOrEmpty(string value, string parameterName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(parameterName);
-            }
+            throw new EmptyStringException(parameterName);
         }
+    }
 
-        public static void AgainstNullOrEmpty(string value, string parameterName)
+    public static void AgainstOutOfRange<T>(T value, T min, T max, string parameterName) where T : IComparable
+    {
+        if (value.CompareTo(min) < 0 || value.CompareTo(max) > 0)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException($"{parameterName} cannot be null or empty.", parameterName);
-            }
+            throw new OutOfRangeException(parameterName, min, max);
         }
-
-        public static void AgainstOutOfRange<T>(T value, T min, T max, string parameterName) where T : IComparable
+    }
+    public static void AgainstNegative(this int value, string parameterName)
+    {
+        if (value < 0)
         {
-            if (value.CompareTo(min) < 0 || value.CompareTo(max) > 0)
-            {
-                throw new ArgumentOutOfRangeException(parameterName, $"{parameterName} must be between {min} and {max}.");
-            }
+            throw new NegativeException(parameterName);
         }
+    }
 
-        public static void AgainstFalse(bool value, string parameterName)
+    public static void AgainstNegativeDecimal(this decimal value, string parameterName)
+    {
+        if (value < 0)
         {
-            if (!value)
-            {
-                throw new ArgumentException($"{parameterName} cannot be false.", parameterName);
-            }
+            throw new NegativeDecimalException(parameterName);
         }
+    }
 
-        public static void AgainstTrue(bool value, string parameterName)
+    public static void AgainstLessThan(this int value, int minValue, string parameterName)
+    {
+        if (value < minValue)
         {
-            if (value)
-            {
-                throw new ArgumentException($"{parameterName} cannot be true.", parameterName);
-            }
+            throw new LessThanException(parameterName);
         }
+    }
 
-        public static void AgainstNullOrEmpty<T>(IEnumerable<T> collection, string parameterName)
+    public static void AgainstGreaterThan(this int value, int maxValue, string parameterName)
+    {
+        if (value > maxValue)
         {
-            if (collection == null || !collection.Any())
-            {
-                throw new ArgumentException($"{parameterName} cannot be null or empty.", parameterName);
-            }
+            throw new GreaterThanException(parameterName);
         }
+    }
 
-        public static void AgainstExceedingCount<T>(IEnumerable<T> collection, int maxCount, string parameterName)
+    public static void AgainstOutOfRange(this int value, int minValue, int maxValue, string parameterName)
+    {
+        if (value < minValue || value > maxValue)
         {
-            if (collection.Count() > maxCount)
-            {
-                throw new ArgumentException($"{parameterName} cannot contain more than {maxCount} items.", parameterName);
-            }
+            throw new OutOfRangeException(parameterName, minValue, maxValue);
         }
+    }
 
-        public static void AgainstNullItems<T>(IEnumerable<T> collection, string parameterName)
+    public static void AgainstFalse(this bool value, string parameterName)
+    {
+        if (!value)
         {
-            if (collection.Any(item => item == null))
-            {
-                throw new ArgumentException($"{parameterName} cannot contain null items.", parameterName);
-            }
+            throw new FalseException(parameterName);
         }
+    }
 
-        public static void AgainstPastDate(DateTime date, string parameterName)
+    public static void AgainstTrue(this bool value, string parameterName)
+    {
+        if (value)
         {
-            if (date < DateTime.Now)
-            {
-                throw new ArgumentException($"{parameterName} cannot be in the past.", parameterName);
-            }
+            throw new TrueException(parameterName);
         }
+    }
 
-        public static void AgainstFutureDate(DateTime date, string parameterName)
+    public static void AgainstUninitializedProperties<T>(this T obj, string parameterName)
+    {
+        var properties = typeof(T).GetProperties();
+        foreach (var property in properties)
         {
-            if (date > DateTime.Now)
+            if (property.GetValue(obj) == null)
             {
-                throw new ArgumentException($"{parameterName} cannot be in the future.", parameterName);
-            }
-        }
-
-        public static void AgainstDateRange(DateTime date, DateTime startDate, DateTime endDate, string parameterName)
-        {
-            if (date < startDate || date > endDate)
-            {
-                throw new ArgumentException($"{parameterName} must be between {startDate} and {endDate}.", parameterName);
-            }
-        }
-
-        public static void AgainstWeekend(DateTime date, string parameterName)
-        {
-            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
-            {
-                throw new ArgumentException($"{parameterName} cannot be on a weekend.", parameterName);
-            }
-        }
-
-        public static void AgainstSpecificDay(DateTime date, DayOfWeek day, string parameterName)
-        {
-            if (date.DayOfWeek == day)
-            {
-                throw new ArgumentException($"{parameterName} cannot be on {day}.", parameterName);
-            }
-        }
-
-        public static void AgainstNegative(int value, string parameterName)
-        {
-            if (value < 0)
-            {
-                throw new ArgumentOutOfRangeException(parameterName, $"{parameterName} cannot be negative.");
-            }
-        }
-
-        public static void AgainstZero(int value, string parameterName)
-        {
-            if (value == 0)
-            {
-                throw new ArgumentException($"{parameterName} cannot be zero.", parameterName);
-            }
-        }
-
-        public static void AgainstOutOfRange(int value, int minValue, int maxValue, string parameterName)
-        {
-            if (value < minValue || value > maxValue)
-            {
-                throw new ArgumentOutOfRangeException(parameterName, $"{parameterName} must be between {minValue} and {maxValue}.");
-            }
-        }
-
-        public static void AgainstNonNumericCharacters(string value, string parameterName)
-        {
-            if (!Regex.IsMatch(value, @"^\d+$"))
-            {
-                throw new ArgumentException($"{parameterName} must contain only numeric characters.", parameterName);
-            }
-        }
-
-        public static void AgainstInvalidEmail(string email, string parameterName)
-        {
-            if (string.IsNullOrWhiteSpace(email) ||
-                !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            {
-                throw new ArgumentException($"{parameterName} must be a valid email address.", parameterName);
-            }
-        }
-
-        public static void AgainstInvalidUrl(string value, string parameterName)
-        {
-            if (!Uri.TryCreate(value, UriKind.Absolute, out var uriResult) ||
-                !(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
-            {
-                throw new ArgumentException($"{parameterName} must be a valid URL.", parameterName);
-            }
-        }
-
-        public static void AgainstNonExistentFile(string filePath, string parameterName)
-        {
-            if (!File.Exists(filePath))
-            {
-                throw new ArgumentException($"{parameterName} does not exist.", parameterName);
-            }
-        }
-
-        public static void AgainstEmptyFile(string filePath, string parameterName)
-        {
-            var fileInfo = new FileInfo(filePath);
-            if (fileInfo.Length == 0)
-            {
-                throw new ArgumentException($"{parameterName} cannot be an empty file.", parameterName);
+                throw new UninitializedPropertyException($"{parameterName} contains uninitialized property: {property.Name}.", parameterName);
             }
         }
     }
+
+
+    public static void AgainstInvalidEmail(string email, string parameterName)
+    {
+        if (string.IsNullOrWhiteSpace(email) ||
+            !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+        {
+            throw new InvalidEmailException(parameterName);
+        }
+    }
+
+    public static void AgainstInvalidUrl(string value, string parameterName)
+    {
+        if (!Uri.TryCreate(value, UriKind.Absolute, out var uriResult) ||
+            !(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+        {
+            throw new InvalidUrlException(parameterName);
+        }
+    }
+
+    public static void AgainstInvalidIp(string ipAddress, string parameterName)
+    {
+        if (!System.Net.IPAddress.TryParse(ipAddress, out _))
+        {
+            throw new InvalidIpException(parameterName);
+        }
+    }
+
+    public static void AgainstInvalidGuid(string value, string parameterName)
+    {
+        if (!Guid.TryParse(value, out _))
+        {
+            throw new InvalidGuidException(parameterName);
+        }
+    }
+
+    public static void AgainstPastDate(DateTime date, string parameterName)
+    {
+        if (date < DateTime.Now)
+        {
+            throw new PastDateException(parameterName);
+        }
+    }
+
+    public static void AgainstFutureDate(DateTime date, string parameterName)
+    {
+        if (date > DateTime.Now)
+        {
+            throw new FutureDateException(parameterName);
+        }
+    }
+
+    public static void AgainstEmptyFile(string filePath, string parameterName)
+    {
+        if (!File.Exists(filePath))
+        {
+            throw new FileNotExistsException(parameterName);
+        }
+
+        var fileInfo = new FileInfo(filePath);
+        if (fileInfo.Length == 0)
+        {
+            throw new EmptyFileException(parameterName);
+        }
+    }
+
+    public static void AgainstInvalidFileExtension(string filePath, string[] validExtensions, string parameterName)
+    {
+        var extension = Path.GetExtension(filePath);
+        if (!validExtensions.Contains(extension))
+        {
+            throw new InvalidFileExtensionException($"{parameterName} must have one of the following extensions: {string.Join(", ", validExtensions)}.");
+        }
+    }
+
+    public static void AgainstNonAlphanumericCharacters(string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
+        {
+            throw new OnlyAlphanumericCharacterException($"{parameterName} must contain only alphanumeric characters.");
+        }
+    }
+
+    public static void AgainstWeakPassword(string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"))
+        {
+            throw new WeakPasswordException($"{parameterName} must be a strong password (at least 8 characters, including uppercase, lowercase, number, and special character).");
+        }
+    }
+
+    public static void AgainstExceedingCount<T>(IEnumerable<T> collection, int maxCount, string parameterName)
+    {
+        if (collection.Count() > maxCount)
+        {
+            throw new ExceedingCountException(parameterName, maxCount);
+        }
+    }
+
+    public static void AgainstEmptyCollection<T>(IEnumerable<T> collection, string parameterName)
+    {
+        if (collection == null || !collection.Any())
+        {
+            throw new EmptyStringException(parameterName);
+        }
+    }
+
+    public static void AgainstNullItems<T>(IEnumerable<T?> collection, string parameterName)
+    {
+        if (collection.Any(item => item == null))
+        {
+            throw new NullValueException($"{parameterName} contains null items.");
+        }
+    }
+
+    public static void AgainstInvalidEnum<TEnum>(TEnum value, string parameterName) where TEnum : struct, Enum
+    {
+        if (!Enum.IsDefined(typeof(TEnum), value))
+        {
+            throw new InvalidEnumValueException(parameterName);
+        }
+    }
+
+    public static void AgainstInvalidXml(string xmlContent, string parameterName)
+    {
+        try
+        {
+            System.Xml.Linq.XDocument.Parse(xmlContent);
+        }
+        catch
+        {
+            throw new InvalidXmlException(parameterName);
+        }
+    }
+
+    public static void AgainstUnrealisticBirthDate(DateTime date, string parameterName)
+    {
+        var maxDate = DateTime.Now.AddYears(-120);
+        if (date > DateTime.Now || date < maxDate)
+        {
+            throw new UnrealisticBirthDateException($"{parameterName} is not a realistic birth date.");
+        }
+    }
+
+    public static void AgainstCharactersOutsideSet(string value, string allowedCharacters, string parameterName)
+    {
+        if (!Regex.IsMatch(value, $"^[{Regex.Escape(allowedCharacters)}]+$"))
+        {
+            throw new CharactersOutsideSetException($"{parameterName} must only contain characters from the allowed set '{allowedCharacters}'.");
+        }
+    }
+
 }
