@@ -187,4 +187,166 @@ public static class StringGuards
             throw new InvalidEmailException(parameterName);
         }
     }
+    public static void AgainstLengthMismatch(this string value, int requiredLength, string parameterName)
+    {
+        if (value.Length != requiredLength)
+        {
+            throw new ArgumentException($"{parameterName} must be exactly {requiredLength} characters long.", parameterName);
+        }
+    }
+
+    public static void AgainstContainingWhitespace(this string value, string parameterName)
+    {
+        if (value.Contains(' '))
+        {
+            throw new ArgumentException($"{parameterName} must not contain whitespace.", parameterName);
+        }
+    }
+    public static void AgainstCharactersOutsideSet(this string value, string allowedCharacters, string parameterName)
+    {
+        if (!Regex.IsMatch(value, $"^[{Regex.Escape(allowedCharacters)}]+$"))
+        {
+            throw new ArgumentException($"{parameterName} must only contain characters from the set '{allowedCharacters}'.", parameterName);
+        }
+    }
+
+    public static void AgainstContainingAnySubstrings(this string value, string[] forbiddenSubstrings, string parameterName)
+    {
+        foreach (var forbiddenSubstring in forbiddenSubstrings)
+        {
+            if (value.Contains(forbiddenSubstring))
+            {
+                throw new ArgumentException($"{parameterName} must not contain the forbidden substring '{forbiddenSubstring}'.", parameterName);
+            }
+        }
+    }
+    public static void AgainstNonPalindrome(this string value, string parameterName)
+    {
+        var reversed = new string(value.ToCharArray().Reverse().ToArray());
+        if (!value.Equals(reversed, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new ArgumentException($"{parameterName} must be a palindrome.", parameterName);
+        }
+    }
+    public static void AgainstInvalidPhoneNumber(this string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^\+?[1-9]\d{1,14}$"))
+        {
+            throw new ArgumentException($"{parameterName} must be a valid phone number.", parameterName);
+        }
+    }
+    public static void AgainstExceedingCharacterCount(this string value, char character, int maxCount, string parameterName)
+    {
+        int count = value.Count(c => c == character);
+        if (count > maxCount)
+        {
+            throw new ArgumentException($"{parameterName} must not contain more than {maxCount} occurrences of '{character}'.", parameterName);
+        }
+    }
+    public static void AgainstInvalidUrl(this string value, string parameterName)
+    {
+        if (!Uri.TryCreate(value, UriKind.Absolute, out var uriResult) ||
+            !(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+        {
+            throw new ArgumentException($"{parameterName} must be a valid URL.", parameterName);
+        }
+    }
+    public static void AgainstNonEmojiCharacters(this string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^[\u1F600-\u1F64F\u1F300-\u1F5FF\u1F680-\u1F6FF\u2600-\u26FF\u2700-\u27BF]+$"))
+        {
+            throw new ArgumentException($"{parameterName} must only contain emoji characters.", parameterName);
+        }
+    }
+
+    public static void AgainstCharacterCountMismatch(this string value, char character, int exactCount, string parameterName)
+    {
+        int count = value.Count(c => c == character);
+        if (count != exactCount)
+        {
+            throw new ArgumentException($"{parameterName} must contain exactly {exactCount} occurrences of '{character}'.", parameterName);
+        }
+    }
+    public static void AgainstNonUppercaseAlphanumeric(this string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^[A-Z0-9]+$"))
+        {
+            throw new ArgumentException($"{parameterName} must contain only uppercase letters and numbers.", parameterName);
+        }
+    }
+
+    public static void AgainstNonLowercaseUnderscore(this string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^[a-z_]+$"))
+        {
+            throw new ArgumentException($"{parameterName} must contain only lowercase letters and underscores.", parameterName);
+        }
+    }
+    public static void AgainstInvalidJson(this string value, string parameterName)
+    {
+        try
+        {
+            System.Text.Json.JsonDocument.Parse(value);
+        }
+        catch
+        {
+            throw new ArgumentException($"{parameterName} must be a valid JSON string.", parameterName);
+        }
+    }
+
+    public static void AgainstInvalidXml(this string value, string parameterName)
+    {
+        try
+        {
+            var xml = System.Xml.Linq.XDocument.Parse(value);
+        }
+        catch
+        {
+            throw new ArgumentException($"{parameterName} must be a valid XML string.", parameterName);
+        }
+    }
+    public static void AgainstNotStartingWithAny(this string value, string[] prefixes, string parameterName)
+    {
+        if (!prefixes.Any(prefix => value.StartsWith(prefix)))
+        {
+            throw new ArgumentException($"{parameterName} must start with one of the following prefixes: {string.Join(", ", prefixes)}.", parameterName);
+        }
+    }
+    public static void AgainstNotEndingWithAny(this string value, string[] suffixes, string parameterName)
+    {
+        if (!suffixes.Any(suffix => value.EndsWith(suffix)))
+        {
+            throw new ArgumentException($"{parameterName} must end with one of the following suffixes: {string.Join(", ", suffixes)}.", parameterName);
+        }
+    }
+    public static void AgainstNotMatchingPrefixAndSuffix(this string value, string prefix, string suffix, string parameterName)
+    {
+        if (!value.StartsWith(prefix) || !value.EndsWith(suffix))
+        {
+            throw new ArgumentException($"{parameterName} must start with '{prefix}' and end with '{suffix}'.", parameterName);
+        }
+    }
+    public static void AgainstInvalidIpAddress(this string value, string parameterName)
+    {
+        if (!System.Net.IPAddress.TryParse(value, out _))
+        {
+            throw new ArgumentException($"{parameterName} must be a valid IP address.", parameterName);
+        }
+    }
+    public static void AgainstInvalidGuid(this string value, string parameterName)
+    {
+        if (!Guid.TryParse(value, out _))
+        {
+            throw new ArgumentException($"{parameterName} must be a valid GUID.", parameterName);
+        }
+    }
+    public static void AgainstWeakPassword(this string value, string parameterName)
+    {
+        if (!Regex.IsMatch(value, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"))
+        {
+            throw new ArgumentException($"{parameterName} must be a strong password (minimum 8 characters, including uppercase, lowercase, number, and special character).", parameterName);
+        }
+    }
+
+
 }

@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <PackageId>OrionGuard</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Tunahan Ali Ozturk</Authors>
     <Company>Tunahan Ali Ozturk</Company>
     <Description>OrionGuard is a lightweight and extensible library for input validation in .NET applications.</Description>
