@@ -12,22 +12,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Kodu kontrol et
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # .NET SDK'sını kur
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0'
 
+      # Bağımlılıkları `src` dizininden yükle
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./src/Moongazing.OrionGuard/Moongazing.OrionGuard.csproj
 
+      # Projeyi `src` dizininden derle
       - name: Build project
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build ./src/Moongazing.OrionGuard/Moongazing.OrionGuard.csproj --no-restore --configuration Release
 
+      # NuGet paketini `src` dizininden oluştur
       - name: Pack NuGet package
-        run: dotnet pack --no-build --configuration Release -o ./nupkgs
+        run: dotnet pack ./src/Moongazing.OrionGuard/Moongazing.OrionGuard.csproj --no-build --configuration Release -o ./nupkgs
 
+      # NuGet paketini yayınla
       - name: Push to NuGet
         run: dotnet nuget push "./nupkgs/*.nupkg" -k ${{ inputs.nuget_api_key }} -s https://api.nuget.org/v3/index.json
