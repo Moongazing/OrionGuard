@@ -1,23 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackageId>OrionGuard</PackageId>
     <Version>1.0.0</Version>
     <Authors>Tunahan Ali Ozturk</Authors>
     <Company>Tunahan Ali Ozturk</Company>
-    <Product>OrionGuard</Product>
     <Description>OrionGuard is a lightweight and extensible library for input validation in .NET applications.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Moongazing/OrionGuard</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Moongazing/Moongazing.OrionGuard</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>../../../LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>../../../README.md</PackageReadmeFile>
     <PackageTags>guard validation exceptions .NET</PackageTags>
-
-    <OutputPath>./nupkgs</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
-    <None Include="LICENSE" Pack="true" PackagePath="" />
+    <None Include="../../../README.md" Pack="true" PackagePath="" />
+    <None Include="../../../LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

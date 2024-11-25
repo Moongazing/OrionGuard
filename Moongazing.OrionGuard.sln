@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{397A784D-16D0-4DC2-8609-3EE0EF18998F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A26C0EB7-E4A7-4335-8423-E8AEE9EF1738}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard", "Moongazing.OrionGuard\Moongazing.OrionGuard.csproj", "{E8E64D3E-F976-487B-A977-82013C1B566F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard.Tests", "Moongazing.OrionGuard.Tests\Moongazing.OrionGuard.Tests.csproj", "{B37C1B2A-1102-47C7-8FB8-62B63610999A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B1FED39-FC54-4EF3-8748-6464DF89C5EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,26 +13,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard.Tests", "tests\Moongazing.OrionGuard.Tests\Moongazing.OrionGuard.Tests.csproj", "{171B1591-9FD2-4C34-84B3-1E74A50C08E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard", "src\Moongazing.OrionGuard\Moongazing.OrionGuard.csproj", "{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E8E64D3E-F976-487B-A977-82013C1B566F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8E64D3E-F976-487B-A977-82013C1B566F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8E64D3E-F976-487B-A977-82013C1B566F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8E64D3E-F976-487B-A977-82013C1B566F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B37C1B2A-1102-47C7-8FB8-62B63610999A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B37C1B2A-1102-47C7-8FB8-62B63610999A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B37C1B2A-1102-47C7-8FB8-62B63610999A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B37C1B2A-1102-47C7-8FB8-62B63610999A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171B1591-9FD2-4C34-84B3-1E74A50C08E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171B1591-9FD2-4C34-84B3-1E74A50C08E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171B1591-9FD2-4C34-84B3-1E74A50C08E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171B1591-9FD2-4C34-84B3-1E74A50C08E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E8E64D3E-F976-487B-A977-82013C1B566F} = {397A784D-16D0-4DC2-8609-3EE0EF18998F}
-		{B37C1B2A-1102-47C7-8FB8-62B63610999A} = {A26C0EB7-E4A7-4335-8423-E8AEE9EF1738}
+		{171B1591-9FD2-4C34-84B3-1E74A50C08E8} = {A26C0EB7-E4A7-4335-8423-E8AEE9EF1738}
+		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450} = {397A784D-16D0-4DC2-8609-3EE0EF18998F}
 	EndGlobalSection
 EndGlobal

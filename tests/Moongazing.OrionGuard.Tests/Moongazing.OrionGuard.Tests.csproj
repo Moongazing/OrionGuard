@@ -16,7 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Moongazing.OrionGuard\Moongazing.OrionGuard.csproj" />
+    <ProjectReference Include="..\..\src\Moongazing.OrionGuard\Moongazing.OrionGuard.csproj" />
   </ItemGroup>
+<PropertyGroup>
+    <IsPackable>false</IsPackable>
+</PropertyGroup>
 
 </Project>

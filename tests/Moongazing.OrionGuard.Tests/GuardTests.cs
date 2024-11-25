@@ -1,4 +1,5 @@
-﻿using Moongazing.OrionGuard.Core;
+﻿
+using Moongazing.OrionGuard.Core;
 using Moongazing.OrionGuard.Exceptions;
 using Moongazing.OrionGuard.Extensions;
 using Xunit;
