@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <PackageId>OrionGuard</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Tunahan Ali Ozturk</Authors>
+    <Company>Tunahan Ali Ozturk</Company>
+    <Product>OrionGuard</Product>
+    <Description>OrionGuard is a lightweight and extensible library for input validation in .NET applications.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Moongazing/OrionGuard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Moongazing/Moongazing.OrionGuard</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>guard validation exceptions .NET</PackageTags>
+
+    <OutputPath>./nupkgs</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+</Project>
