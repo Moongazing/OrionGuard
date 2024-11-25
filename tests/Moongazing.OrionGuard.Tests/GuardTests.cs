@@ -47,15 +47,15 @@ public class GuardTests
         Assert.Throws<InvalidEmailException>(() => invalidEmail.AgainstInvalidEmail(nameof(invalidEmail)));
     }
 
-    //[Fact]
-    //public void AgainstNegativeDecimal_ShouldThrowOutOfRangeException_WhenValueIsNegative()
-    //{
-    //    // Arrange
-    //    decimal negativeValue = -1m;
+    [Fact]
+    public void AgainstNegativeDecimal_ShouldThrowOutOfRangeException_WhenValueIsNegative()
+    {
+        // Arrange
+        decimal negativeValue = -1m;
 
-    //    // Act & Assert
-    //    Assert.Throws<OutOfRangeException>(() => Guard.AgainstNegativeDecimal(negativeValue, nameof(negativeValue)));
-    //}
+        // Act & Assert
+        Assert.Throws<OutOfRangeException>(() => Guard.AgainstNegativeDecimal(negativeValue, nameof(negativeValue)));
+    }
 
     [Theory]
     [InlineData(0.0, -1.0, 1.0)]
@@ -66,15 +66,15 @@ public class GuardTests
         Assert.Throws<OutOfRangeException>(() => Guard.AgainstOutOfRange(value, min, max, nameof(value)));
     }
 
-    //[Fact]
-    //public void AgainstInvalidEnum_ShouldThrowInvalidEnumValueException_WhenEnumIsInvalid()
-    //{
-    //    // Arrange
-    //    TestEnum invalidEnum = (TestEnum)999;
+    [Fact]
+    public void AgainstInvalidEnum_ShouldThrowInvalidEnumValueException_WhenEnumIsInvalid()
+    {
+        // Arrange
+        TestEnum invalidEnum = (TestEnum)999;
 
-    //    // Act & Assert
-    //    Assert.Throws<InvalidEnumValueException>(() => Guard.AgainstInvalidEnum(invalidEnum, nameof(invalidEnum)));
-    //}
+        // Act & Assert
+        Assert.Throws<InvalidEnumValueException>(() => Guard.AgainstInvalidEnum(invalidEnum, nameof(invalidEnum)));
+    }
 
     [Fact]
     public void AgainstRegexMismatch_ShouldThrowRegexMismatchException_WhenPatternDoesNotMatch()
@@ -96,25 +96,25 @@ public class GuardTests
         Assert.Throws<RegexMismatchException>(() => value.AgainstRegexMismatch(pattern, nameof(value)));
     }
 
-    //[Fact]
-    //public void AgainstPastDate_ShouldThrowPastDateException_WhenDateIsInPast()
-    //{
-    //    // Arrange
-    //    DateTime pastDate = DateTime.Now.AddDays(-1);
+    [Fact]
+    public void AgainstPastDate_ShouldThrowPastDateException_WhenDateIsInPast()
+    {
+        // Arrange
+        DateTime pastDate = DateTime.Now.AddDays(-1);
 
-    //    // Act & Assert
-    //    Assert.Throws<PastDateException>(() => Guard.AgainstPastDate(pastDate, nameof(pastDate)));
-    //}
+        // Act & Assert
+        Assert.Throws<PastDateException>(() => Guard.AgainstPastDate(pastDate, nameof(pastDate)));
+    }
 
-    //[Fact]
-    //public void AgainstFutureDate_ShouldThrowFutureDateException_WhenDateIsInFuture()
-    //{
-    //    // Arrange
-    //    DateTime futureDate = DateTime.Now.AddDays(1);
+    [Fact]
+    public void AgainstFutureDate_ShouldThrowFutureDateException_WhenDateIsInFuture()
+    {
+        // Arrange
+        DateTime futureDate = DateTime.Now.AddDays(1);
 
-    //    // Act & Assert
-    //    Assert.Throws<FutureDateException>(() => Guard.AgainstFutureDate(futureDate, nameof(futureDate)));
-    //}
+        // Act & Assert
+        Assert.Throws<FutureDateException>(() => Guard.AgainstFutureDate(futureDate, nameof(futureDate)));
+    }
 }
 
 public enum TestEnum
