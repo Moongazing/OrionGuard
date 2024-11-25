@@ -18,7 +18,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="docs/LICENSE.txt" Pack="true" PackagePath="" />
-    <None Include="docs/README.md" Pack="true" PackagePath="" />
+    <None Include="docs/LICENSE.txt" Pack="true" PackagePath="">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="docs/README.md" Pack="true" PackagePath="">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
