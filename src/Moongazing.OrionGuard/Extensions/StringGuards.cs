@@ -168,7 +168,7 @@ public static class StringGuards
     /// </summary>
     public static void AgainstNotAllLowercase(this string value, string parameterName)
     {
-        if (value != value.ToLowerInvariant())
+        if (!value.Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             throw new ArgumentException($"{parameterName} must be all lowercase.", parameterName);
         }
@@ -182,7 +182,7 @@ public static class StringGuards
     public static void AgainstInvalidEmail(this string email, string parameterName)
     {
         if (string.IsNullOrWhiteSpace(email) ||
-            !System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
         {
             throw new InvalidEmailException(parameterName);
         }
