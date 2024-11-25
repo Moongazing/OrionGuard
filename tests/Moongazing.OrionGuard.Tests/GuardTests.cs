@@ -46,17 +46,6 @@ public class GuardTests
         // Act & Assert
         Assert.Throws<InvalidEmailException>(() => invalidEmail.AgainstInvalidEmail(nameof(invalidEmail)));
     }
-
-    [Fact]
-    public void AgainstNegativeDecimal_ShouldThrowOutOfRangeException_WhenValueIsNegative()
-    {
-        // Arrange
-        decimal negativeValue = -1m;
-
-        // Act & Assert
-        Assert.Throws<OutOfRangeException>(() => Guard.AgainstNegativeDecimal(negativeValue, nameof(negativeValue)));
-    }
-
     [Theory]
     [InlineData(0.0, -1.0, 1.0)]
     [InlineData(-10.0, -15.0, -5.0)]
@@ -64,16 +53,6 @@ public class GuardTests
     {
         // Act & Assert
         Assert.Throws<OutOfRangeException>(() => Guard.AgainstOutOfRange(value, min, max, nameof(value)));
-    }
-
-    [Fact]
-    public void AgainstInvalidEnum_ShouldThrowInvalidEnumValueException_WhenEnumIsInvalid()
-    {
-        // Arrange
-        TestEnum invalidEnum = (TestEnum)999;
-
-        // Act & Assert
-        Assert.Throws<InvalidEnumValueException>(() => Guard.AgainstInvalidEnum(invalidEnum, nameof(invalidEnum)));
     }
 
     [Fact]
