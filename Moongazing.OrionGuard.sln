@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard.Tests", "tests\Moongazing.OrionGuard.Tests\Moongazing.OrionGuard.Tests.csproj", "{0E0B58CD-694D-43EE-91B5-82CD7ADB8144}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{A39C23D2-F2C0-258D-165A-CF1E7FEE6E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moongazing.OrionGuard.Demo", "demo\Moongazing.OrionGuard.Demo\Moongazing.OrionGuard.Demo.csproj", "{76655A13-2DE8-4E8D-9174-66A6D457388B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{0E0B58CD-694D-43EE-91B5-82CD7ADB8144}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E0B58CD-694D-43EE-91B5-82CD7ADB8144}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E0B58CD-694D-43EE-91B5-82CD7ADB8144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76655A13-2DE8-4E8D-9174-66A6D457388B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76655A13-2DE8-4E8D-9174-66A6D457388B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76655A13-2DE8-4E8D-9174-66A6D457388B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76655A13-2DE8-4E8D-9174-66A6D457388B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +46,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0F64A4DD-F6F0-4F57-BC0C-2E94D8E45450} = {397A784D-16D0-4DC2-8609-3EE0EF18998F}
 		{0E0B58CD-694D-43EE-91B5-82CD7ADB8144} = {A26C0EB7-E4A7-4335-8423-E8AEE9EF1738}
+		{76655A13-2DE8-4E8D-9174-66A6D457388B} = {A39C23D2-F2C0-258D-165A-CF1E7FEE6E7B}
 	EndGlobalSection
 EndGlobal

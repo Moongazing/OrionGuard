@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Moongazing.OrionGuard.Demo": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
