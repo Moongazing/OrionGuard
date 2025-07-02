@@ -17,12 +17,13 @@
     </Description>
     <PackageLicenseFile>docs/LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+    <PackageIcon>docs/logo.png</PackageIcon>
 
     <PackageTags>guard validation exceptions .NET</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docs\README.md" Pack="true" PackagePath="docs/"/>
-    <None Include="docs\LICENSE.txt" Pack="true" PackagePath="docs/"/>
+    <None Include="docs\README.md" Pack="true" PackagePath="docs/" />
+    <None Include="docs\LICENSE.txt" Pack="true" PackagePath="docs/" />
 
   </ItemGroup>
 </Project>
