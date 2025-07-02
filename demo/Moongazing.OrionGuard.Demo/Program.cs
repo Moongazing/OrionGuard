@@ -40,7 +40,7 @@ Guard.AgainstLessThan(10, 30, "balance");
 // Guard: Strings
 Guard.AgainstInvalidEmail("\"example@mail.com\".", "email");
 Guard.AgainstInvalidUrl("\"https://example.com\"", "url");
-"     ".AgainstOnlyWhiteSpace("code");
+StringGuards.AgainstOnlyWhiteSpace("\"     \"", "code");
 
 // Guard: IP / Guid
 NetworkGuards.AgainstInvalidIpAddress("\"192.168.1.1\"", "ipAddress");
