@@ -11,3 +11,11 @@
         void Validate();
     }
 }
+public interface IFluentGuardStep<T>
+{
+    IFluentGuardStep<T> NotNull();
+    IFluentGuardStep<T> NotEmpty();
+    IFluentGuardStep<T> Length(int min, int max);
+    IFluentGuardStep<T> Matches(string pattern);
+    T Value { get; }
+}

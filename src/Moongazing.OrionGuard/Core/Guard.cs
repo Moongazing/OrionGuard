@@ -9,6 +9,10 @@ namespace Moongazing.OrionGuard.Core;
 
 public static class Guard
 {
+    public static GuardBuilder<T> For<T>(T value, string parameterName)
+    {
+        return new GuardBuilder<T>(value, parameterName);
+    }
     public static void AgainstNull<T>(T? value, string parameterName) where T : class
     {
         if (value == null)
